@@ -134,3 +134,140 @@ let add: (Int, Int) -> Int = {
 
 let result = add(1, 2)
 print(result)
+
+
+// function
+// parameter and argument
+// parameter: là biến được khai báo trong định nghĩa 1 hàm hoặc phương thức
+// => hoạt động như 1 vị trí giữ chỗ cho mà giá trị cụ thể sẽ được truyền vào khi hàm hoặc phương thức được gọi
+// argument là cái giá trị cụ thể được truyền vào khi hàm/method đc gọi
+func add(a: Int, b:Int) -> Int {
+    return a+b
+}
+print(add(a: 12, b: 12))
+func greet123(name: String) {
+    print("Hello \(name)")
+}
+greet123(name: "HoangTHanh")
+// variadic parameter
+// => có thể nhận tham số tùy số lượng, ưng nhập bao nhiêu thì nhập
+func inputName(names:String...) -> Void {
+    for item in names {
+        print(item, terminator: "\t")
+    }
+}
+inputName(names: "thanh", "chanh", "tinh")
+
+// inout parameter
+// này thì giống con trỏ, keyword: inout
+func swap(a: inout Int, b: inout Int) -> Void {
+    var temp = a
+    a = b
+    b = temp
+}
+var asw = 123
+var bsw = 321
+swap(a: &asw, b: &bsw)
+print("\(asw) - \(bsw)")
+
+func testFunc() {
+    "hello"
+}
+print(type(of: testFunc()))
+
+func add2(_ a: Int, _ b: Int) -> Int {
+    return a+b
+}
+add2(12, 32)
+// default value parameter
+func defaultValue(b:Int = 123) -> Int {
+    return b
+}
+print(defaultValue())
+
+// function type
+// (Int, Int) -> Int
+print(type(of: add))
+
+// closures
+let addClo = {
+    (a:Int, b:Int) -> Int in
+    let sum = a + b
+    return sum
+}
+print(type(of: addClo))
+
+var closuresTest1 = [3, 6, 8, 12, 2, 1]
+var resetCLosures = closuresTest1.sorted { (s1: Int, s2: Int) in
+    return  s1 > s2
+}
+print(resetCLosures)
+
+class Search {
+    func start(withCompleted: (_ res:Int, _ err:Int) -> (Bool) ) {
+        let res = 1
+        let err = 2
+        print(withCompleted(res, err))
+    }
+}
+
+func main() {
+    let search = Search()
+    search.start { res, err in
+        return res > 1
+    }
+}
+main()
+// ở phần định nghĩa hàm thì ta thấy, tham số truyền vào hàm sẽ là closures, closures này thì gồm có 2 tham số và kiểu trả về là bool.
+// xong bên trong hàm sẽ sử dụng(gọi lại cái closures đó để giải quyết vấn đề mà hàm nó thực hiện)
+// rồi t gọi hàm thì ta cần truyền vào 1 closures để hàm có thể thực hiện.
+// => ngẫm kĩ lại các ví dụ này
+
+
+// tralling closures => closures được viết sau dấu ngoặc của lời gọi hàm
+
+func makeIncrement(forIncrement amount: Int) -> () -> Int {
+    var runningTotal = 0
+//    c1
+//    func incrementer() -> Int { // this closure
+//        runningTotal += amount
+//        return runningTotal
+//    }
+//    return incrementer
+//
+//     c2
+    return {
+        runningTotal += amount
+        return runningTotal
+    }
+}
+
+let incrementTest = makeIncrement(forIncrement: 20)
+let incrementTest2 = makeIncrement(forIncrement: 10)
+print(type(of: makeIncrement))
+print(type(of: incrementTest))
+incrementTest()
+incrementTest()
+incrementTest()
+// ex:
+var closures: [() -> Void] = []
+
+for i in 1...3 {
+    closures.append {
+        print(i)
+    }
+}
+
+closures[0]() // Output: 4
+closures[1]() // Output: 4
+closures[2]() // Output: 4
+
+// ex biến đổi array thành array moi chua true false
+var listNumber = [1, 5, 6, 3, 8]
+let boolNumber = listNumber.map {
+    (n) -> Bool in
+    return n > 3
+}
+print(boolNumber)
+
+
