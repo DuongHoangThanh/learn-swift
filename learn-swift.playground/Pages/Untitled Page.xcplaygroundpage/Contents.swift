@@ -397,6 +397,166 @@ loadImage = .failure(1234, "Failured")
 checkNetError(loadImage)
 
 
-// struct
+// struct vs class
+struct Resolution {
+    var width = 0
+    var height = 0
+}
+
+class VideoMode {
+    var resolution = Resolution()
+    var interlaced = false
+    var frameRate = 0.0
+    var name:String?
+}
+
+// => struct and enum are value type
+
+struct PersonStruct {
+    var name = ""
+    var age = 0
+}
+
+class PersonClass {
+    var name = ""
+    var age = 0
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+}
+
+let pClass = PersonClass(name: "thanh", age: 21)
+let pClass2 = pClass
+pClass2.age = 22
+let pStruct = PersonStruct(name: "thanh1", age: 21)
+let pStruct2 = pStruct
+pStruct2.age
+
+
+// toán tử === , so sánh tham chiều, nó có cùng tham chiếu không
+if pClass === pClass2 {
+        print("Cung tham chieu den 1 doi tuong")
+}
+
+
+// properties
+// 2 loại property:
+// - stored property: lưu trữ (class and struct)
+// - computed property: tính toán (class, struct, enum), không lưu trữ giá trị mà chỉ tính toán thông qua get set
+// lazy => khi dùng thì mới khởi tạo nó
+// ex:
+struct Point {
+    var x = 0.0, y = 0.0
+    
+}
+
+struct Size {
+    var width = 0.0, height = 0.0
+}
+
+struct Rect {
+    var origin = Point()
+    var size = Size()
+    var center: Point {
+        get {
+            let centerX = origin.x + (size.width/2)
+            let centerY = origin.y + (size.height/2)
+            return Point(x: centerX, y: centerY)
+        }
+        
+        set(newCenter) {
+            origin.x = newCenter.x - (size.width/2)
+            origin.y = newCenter.y - (size.height/2)
+        }
+    }
+}
+
+var square = Rect(origin: Point(x: 0.0, y: 0.0), size: Size(width: 10.0, height: 10.0))
+let initialSquareCenter = square.center
+square.center = Point(x: 15.0, y: 15.0)
+
+struct Rect1 {
+    var width = 0.0, height = 0.0
+    var area: Double {
+        return width*height
+    }
+}
+
+let rec1 = Rect1(width: 10.0, height: 20.0)
+print("Area: \(rec1.area)")
+
+// Property observers : theo doi property
+// khi nào thì 1 properties được đặt lại giá trị
+// willSet, newValue
+// didSet, oldValue
+
+// static: sử dụng cho thuộc tính hoặc phương thức của 1 loại mà không cần phải taoh thể hiện của loại đó => là chung
+// sẽ có 2 loại instance properties vs type properties
+
+
+
+// method
+// trong struct các thuộc tính không thể thay đổi bất kì 1 thuộc tính nào của cấu trúc => muốn làm thì phải thêm mutating
+// và để gọi phương thức mutating thì cũng cần 1 biến có thể thay đổi được (var)
+struct Test {
+    var a = 0
+    mutating func increment(by amount: Int) {
+        a += amount
+    }
+}
+//let test = Test() => error
+var test = Test()
+test.increment(by: 10)
+
+
+// subscript
+// 1 cách để truy cập và gián các giá trị cho các phần tử của tập hợp nào đó bằng cách sử sử dụng dấu []
+
+
+
+// inheritance
+class Vehicle {
+    var currentSpeed = 0.0
+    var description : String {
+        return "traveling at \(currentSpeed)"
+    }
+    func makeNoise() {
+        print("test make noise")
+    }
+}
+
+class ByCicle: Vehicle {
+    var hasbaket = false
+}
+let b1 = ByCicle()
+b1.currentSpeed = 10
+print(b1.description)
+
+
+class Animal {
+    var name: String
+    var age: Int
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+    
+    func makeSound() {
+        print("Hello world")
+    }
+}
+
+class Cat: Animal {
+    override func makeSound() {
+        print("meo meo")
+    }
+}
+
+var cat1 = Cat(name: "tieu my", age: 4)
+cat1.makeSound()
+
+// initialization and deinitialization
+
 
 
