@@ -559,4 +559,52 @@ cat1.makeSound()
 // initialization and deinitialization
 
 
+// Polymorphism
+// Abstract
+// Protocol
+
+protocol Drawable {
+    func draw()
+}
+
+class Circle: Drawable {
+    func draw() {
+        print("Draw in circle")
+    }
+}
+
+class Rectangle: Drawable {
+    func draw() {
+        print("Draw in Rectangle")
+    }
+}
+
+func renderShape(shape: Drawable) {
+    shape.draw()
+}
+
+let circle = Circle()
+let rect = Rectangle()
+
+renderShape(shape: circle)
+renderShape(shape: rect)
+
+
+// generics
+protocol Summable {
+    static func +(num1: Self, num2: Self) -> Self
+}
+
+func addTwoNumber<T: Summable>(a: T, b: T) -> T {
+    return a + b
+}
+
+extension  Double: Summable {}
+
+let n1 = 5.0
+let n2 = 2.0
+let total = addTwoNumber(a: n1, b: n2)
+print(total)
+print("Hello ")
+
 
