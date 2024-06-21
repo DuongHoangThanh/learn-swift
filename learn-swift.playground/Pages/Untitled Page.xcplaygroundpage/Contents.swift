@@ -293,7 +293,8 @@ let convertNum = listNumChange.map { n -> String in
 }
 
 // enum
-// enum là 1 loại dữ liệu, cho phép định nghĩa 1 tập hợp các giá trị để tạo các biến, hằng có thể chứa 1
+// enum là 1 loại dữ liệu, cho phép định nghĩa 1 tập hợp các giá trị
+// co nghĩa cho phép định nghĩa 1 nhóm các giá trị có liên quan lại với nhau.
 enum CompassPoint {
     case north
     case south
@@ -340,8 +341,62 @@ print(orderStatus)
 
 
 // raw value
-//
+// nó là giá trị cố định được liên kết với mõi case trong enum
+enum Planet2: Int {
+case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
+}
+// co case tim rawvalue
+let earth = Planet2.earth.rawValue
+print(earth)
+
+let possiblePlanet = Planet2(rawValue: 6)
+print(type(of: possiblePlanet))
+
+// Recursive enum
+enum A {
+    case number(Int)
+    indirect case addition(A, A)
+    indirect case mutiplication(A, A)
+}
+
+let five = A.number(5)
+let four = A.number(4)
+let sum = A.addition(five, four)
+let product = A.mutiplication(four, five)
+
+func evaluate(_ expression: A) -> Int {
+    switch expression {
+    case let .number(value):
+        return value
+    case let .addition(left, right):
+        return evaluate(left) + evaluate(right)
+    case let .mutiplication(left, right):
+        return evaluate(left) * evaluate(right)
+    }
+}
+
+print(evaluate(product))
+
+// ex:
+enum NetError {
+    case success
+    case failure(Int, String)
+}
+
+func checkNetError(_ active: NetError) {
+    switch active {
+    case .success:
+        print("Success")
+    case let .failure(code, des):
+        print("Error: \(code) - \(des)")
+    }
+}
+
+var loadImage = NetError.success
+loadImage = .failure(1234, "Failured")
+checkNetError(loadImage)
 
 
+// struct
 
 
