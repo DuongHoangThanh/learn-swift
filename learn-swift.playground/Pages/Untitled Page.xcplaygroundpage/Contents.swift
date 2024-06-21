@@ -195,6 +195,13 @@ let addClo = {
     let sum = a + b
     return sum
 }
+
+let closuresExam = {
+    (a:Int) -> Int in
+    let total = a+123
+    return total
+}
+
 print(type(of: addClo))
 
 var closuresTest1 = [3, 6, 8, 12, 2, 1]
@@ -269,5 +276,72 @@ let boolNumber = listNumber.map {
     return n > 3
 }
 print(boolNumber)
+
+// ex
+var listNum = [1: "one", 2: "two", 3: "three", 4: "four", 5:"five", 6:"six", 7: "seven", 8:"eight", 9: "nine"]
+
+var listNumChange = [133, 63, 86]
+
+let convertNum = listNumChange.map { n -> String in
+    var output = ""
+    var number = n
+    repeat {
+        output = " " + listNum[number % 10]! + output
+        number = number / 10
+    } while number > 0
+    return output
+}
+
+// enum
+// enum là 1 loại dữ liệu, cho phép định nghĩa 1 tập hợp các giá trị để tạo các biến, hằng có thể chứa 1
+enum CompassPoint {
+    case north
+    case south
+    case east
+    case west
+}
+
+var direction = CompassPoint.north
+print(direction)
+//    đính dữ liệu
+enum Bardcode {
+    case upc(Int, Int, Int, Int)
+    case qrCode(String)
+}
+var productCode = Bardcode.upc(123, 123, 431, 77)
+//productCode = .qrCode("#fdskgsdf")
+switch productCode {
+case .qrCode(let productCode):
+    print("product code: \(productCode)")
+case .upc(let n1, let n2, let n3, let n4):
+    print("product code: \(n1), \(n2), \(n3), \(n4)")
+}
+
+
+enum OderStatus {
+    case pending
+    case processing
+    case shipped(trackingNumber: String)
+    case delivered(signature: String)
+    case cancelled(reason: String)
+}
+
+// sử dụng nó cho 1 đơn hàng cụ thể
+var orderStatus: OderStatus = .pending
+// don hang bat dau dc xu li
+orderStatus = .processing
+// don hang da dc gui di va co so theo doi
+orderStatus = .shipped(trackingNumber: "09183453")
+// don hang da duoc giao va ki nhan boi nguoi nhan
+orderStatus = .delivered(signature: "hoangthanh")
+// don hang bi huy do ly do cu the
+orderStatus = .cancelled(reason: "out of stock")
+print(orderStatus)
+
+
+// raw value
+//
+
+
 
 
