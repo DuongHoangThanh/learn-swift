@@ -5,7 +5,20 @@ import UIKit
 var name = "Thanh"
 let age = 21
 print("My name is \(name), Im \(age) year old")
+// january - february - march - april - may - june - july - august - september - october - november - december
 
+// var let new
+var nameStudent = "DHT"
+let year = 2003
+print("Hello, I'm \(nameStudent) -  \(year)")
+print("""
+    xin chao moi nguoi da den voi chanel cua
+        *******
+         *****
+          ***
+           * 
+    Hoang Thanh
+""")
 
 // data type
 let pi:Double = 3.14
@@ -13,14 +26,69 @@ var isLoggedIn:Bool = true
 var address:String = "Quang Ngai"
 // type annotation :Doube, :String
 
+// casting
+let str1 = "hello"
+let num1 = 123
+let testCasting = str1 + String(num1)
 
-// operator
+// operators
+let apple = 3
+let oranges = 5
+let appleSummary = "I have \(apple) apples. "
+let b = 10
+let a = 5
+print(a<b)
+
+
 // condition
 if age > 18 {
     print("You are an adult")
 } else {
     print("You are a minor")
 }
+
+var listName = ["DHT", "TT", "KK"]
+for name in listName {
+    print(name)
+}
+
+var dictionaryExample = ["cat": 9, "dog":2, "fish": 6]
+for item in dictionaryExample {
+    print("\(item.key) - \(item.value)")
+}
+
+for index in 1...10 {
+    print(index)
+}
+
+var i = 1
+while (i<5) {
+    print("This is TRUE ")
+    i+=1
+}
+repeat {
+    print("this is first")
+} while (false)
+
+switch "asdfasd" {
+case "monday":
+    print(2)
+case "tuesday":
+    print(3)
+case "wednesday":
+    print(4)
+case "thursday":
+    print(5)
+case "friday":
+    print(6)
+case "saturday":
+    print(7)
+case "sunday":
+    print(8)
+default:
+    print("Nothing")
+}
+
 
 let score = 12
 switch score {
@@ -37,14 +105,30 @@ var arr1 = [1, 4, 5, 6]
 var arr2:Any = [1, 2, "thanh", "chanh"]
 var arr3:[Double] = [1.3, 2.5, 6.4]
 
+var arr5 = [1, 2, 4]
+var arr6:[Double] = [1.2, 3.5, 5.3]
+arr5.append(2)
+arr5 += [1,2 ,5]
+arr5[1] = 5
+print(arr5)
+
+for item in arr5 {
+    print(item)
+}
+
 for i in arr1 {
     print(i)
 }
-    // method in array
+// method in array
 arr1.append(2)
 arr1.count
 arr1.insert(123, at: 0)
 arr1.remove(at: 2) // return value is removed
+arr1.removeLast()
+
+for (index, value) in arr1.enumerated() {
+    print("Item \(index + 1):  \(value)")
+}
 
 
 // Set
@@ -54,9 +138,17 @@ var team2:Set = ["a", "b", "c", "c"]
 // nếu trùng thì nó chỉ hiện 1 cái
 print(team2)
 
+// Set new
+let newString = "Hhhh hasdh"
+let arrayString = Array(newString)
+let setString = Set(arrayString)
+print(setString)
+var setNew:Set = [1,3,5,5]
+print(setNew)
+
 
 // Dictionary
-var dic1 = [1: "DHT", 2:"PDC", 3:"TDT"]
+var dic1 = [2: "DHT", 1:"PDC", 3:"TDT", 6:"NTPD"]
 var dic2:[Int:String] = [:]
 var dic3 = [Int:String]()
 var name1 = dic1[1]
@@ -67,11 +159,21 @@ var keys = Array(dic1.keys)
 var values = Array(dic1.values)
 var removeValue = dic1.removeValue(forKey: 2)
 print(removeValue!)
+print(dic1)
 var reset123 = dic1.sorted(by: {
     dic1, dic2 in
-    return dic1.key > dic2.key
+    return dic1.key < dic2.key
 })
 print(reset123)
+
+// Dictionary new
+var dictionaryNew1 = [1: "2", 2:"name"]
+print(dictionaryNew1[2]!)
+print(type(of: dictionaryNew1[1]!))
+var dictionaryAny:[String:Any] = ["id": 1, "username": "DHT"]
+print(dictionaryAny)
+
+
 
 
 // Tuple
@@ -103,6 +205,7 @@ func optionals(_ value: Int? = nil) -> Int {
     }
 }
 var opt1:String? = "hello"
+print("opt1: \(opt1!)")
 print(type(of: opt1))
 if let optnew = opt1 {
     print("optnew: \(optnew)")
@@ -120,6 +223,64 @@ print(opt2!)
 var number:Int? = nil
 var number2 = number ?? 2
 print(number2)
+
+func greet(person: [String: String]) {
+    guard let name = person["name"] else {
+        return
+    }
+    
+    print("Hello \(name)")
+    
+    guard let location = person["location"] else {
+        return
+    }
+    
+    print("I hope the weather is nice in \(location)")
+}
+greet(person: ["name": "Hoang Thanh", "location": "Quang Ngai"])
+
+var optionalString:String
+var optionalString2:String? = nil
+optionalString2 = "Hello"
+print("optionalString2: \(optionalString2!)")
+
+let optionalChaining:String? = "new opt"
+let count = optionalChaining?.count
+
+let newOpt = optionalChaining ?? "hello"
+print(newOpt)
+
+var testForin1 = "hello cin chafo tat car moi nguoi"
+for i in testForin1 {
+    print(i)
+}
+var arrayTestForIn = [1, 2, 45, 5, 62]
+for (index, value) in arrayTestForIn.enumerated() {
+    print("index: \(index) - value: \(value)")
+}
+
+class Stock {
+    var code:String?
+    var price:Double?
+    
+    init(code: String? = nil, price: Double? = nil) {
+        self.code = code
+        self.price = price
+    }
+}
+
+func getStock() -> Stock? {
+    let stock = Stock()
+    return stock
+}
+
+if getStock()?.code == "hello" {
+    print("this is code = hello")
+}
+
+
+
+
 
 // Function and closures
 func greet(name: String) -> String {
@@ -195,6 +356,12 @@ let addClo = {
     let sum = a + b
     return sum
 }
+
+var studentName = {
+    (nameString: String) -> String in
+    return nameString
+}
+print(studentName("Thanh"))
 
 let closuresExam = {
     (a:Int) -> Int in
@@ -521,6 +688,11 @@ class Vehicle {
     var description : String {
         return "traveling at \(currentSpeed)"
     }
+    
+    init(currentSpeed: Double = 0.0) {
+        self.currentSpeed = currentSpeed
+    }
+    
     func makeNoise() {
         print("test make noise")
     }
@@ -528,8 +700,12 @@ class Vehicle {
 
 class ByCicle: Vehicle {
     var hasbaket = false
+    init(hasbaket: Bool = false, currentSpeed: Double) {
+        self.hasbaket = hasbaket
+        super.init(currentSpeed: currentSpeed)
+    }
 }
-let b1 = ByCicle()
+let b1 = ByCicle(hasbaket: true, currentSpeed: 10.0)
 b1.currentSpeed = 10
 print(b1.description)
 
@@ -557,6 +733,9 @@ var cat1 = Cat(name: "tieu my", age: 4)
 cat1.makeSound()
 
 // initialization and deinitialization
+
+// new abstract
+
 
 
 // Polymorphism
@@ -606,5 +785,6 @@ let n2 = 2.0
 let total = addTwoNumber(a: n1, b: n2)
 print(total)
 print("Hello ")
+
 
 
