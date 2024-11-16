@@ -397,4 +397,99 @@ intStack.push(item: 284)
 intStack.show()
 
 // Generic with Associated Type
+protocol Container {
+    associatedtype Item
+    var items: [Item] {get set}
+    mutating func addItem(_ item: Item)
+}
+
+struct IntContainer: Container {
+    typealias Item = Int
+    var items: [Int]
+    mutating func addItem(_ item: Int) {
+        items.append(item)
+    }
+}
+
+struct StringContainer: Container {
+    typealias Item = String
+    var items: [String] = []
+    func addItem(_ item: String) {
+        print(item)
+    }
+}
+
+var intContainer = IntContainer(items: [1,24, 4,5,21,5])
+intContainer.addItem(12)
+
+// Example
+
+func swap2<T>(a: inout T, b: inout T) {
+    print("Begin a: \(a) - b: \(b)")
+    var temp = a
+    a = b
+    b = temp
+    print("After a: \(a) - b: \(b)")
+}
+
+var a = 5
+var b = 10
+var a2 = 4.4
+var b2 = 7.7
+swap2(a: &a, b: &b)
+swap2(a: &a2, b: &b2)
+
+// Ex:
+// 4: su dung generic de tim gia tri lon nhat trong mang
+func isBig<T:Comparable>(array: [T]) -> T? {
+    guard !array.isEmpty else { return nil}
+    var max:T = array[0]
+    for i in array {
+        if i>max {
+            max = i
+        }
+    }
+    return max
+}
+
+var array2 = [1, 2,5 , 6, 2, 54, 4, 14, 6]
+var array3:[Int] = []
+if let numMax = isBig(array: array2) {
+    print(numMax)
+}
+
+// 5: tao ra 1 class Stack
+
+struct Stack2<T> {
+    var elements:[T] = []
+    
+    mutating func push(_ element: T) {
+        elements.append(element)
+    }
+    
+    mutating func pop() -> T? {
+        return elements.popLast()
+    }
+}
+
+struct Queue2<T> {
+    var elements: [T] = []
+
+    mutating func push(_ element: T) {
+        elements.append(element)
+    }
+    
+    mutating func pop() -> T? {
+        return elements.remove(at: 0)
+    }
+}
+ 
+
+struct Pair<T, U> {
+    var first:T
+    var second:U
+}
+
+let intPair = Pair(first: 12, second: "asds")
+print(type(of: intPair))
 
