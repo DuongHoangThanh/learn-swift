@@ -1,5 +1,13 @@
 import UIKit
 
+
+// sort
+let array1 = [2, 5, 1, 4, 7, 9, 3, 8]
+let sortedArray = array1.sorted { $0 > $1 }
+let testSort1 = array1.sorted(by: { (s1: Int, s2: Int) -> Bool in
+        return s1 > s2
+})
+
 // map
 
 // filter
@@ -18,5 +26,10 @@ let even2 = digit.filter {
 }
 print(even2)
 
+let even3 = digit.filter { (s1: Int) -> Bool in
+    return s1 % 2 == 0
+}
+
 
 // reduce
+
