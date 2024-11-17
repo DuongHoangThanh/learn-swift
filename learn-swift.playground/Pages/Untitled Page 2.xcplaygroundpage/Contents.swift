@@ -493,3 +493,6 @@ struct Pair<T, U> {
 let intPair = Pair(first: 12, second: "asds")
 print(type(of: intPair))
 
+//
+var salary = 20*1
+

@@ -786,5 +786,19 @@ let total = addTwoNumber(a: n1, b: n2)
 print(total)
 print("Hello ")
 
+// closures
+// ex1:
+let numbers = [1, 5, 2, 6, 23,5, 73, 2]
+let newNumbers = numbers.sorted(by: {
+    (a, b) -> Bool in
+    return a > b
+})
+print(newNumbers)
+
+
+
+// callback
+
+
 
 
